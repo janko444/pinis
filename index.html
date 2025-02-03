@@ -3,19 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Szachy Online</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Szachy SVG</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #eee;
+        }
+        #board {
+            display: grid;
+            grid-template-columns: repeat(8, 80px);
+            grid-template-rows: repeat(8, 80px);
+            border: 5px solid black;
+        }
+        .square {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .light { background-color: #f0d9b5; }
+        .dark { background-color: #b58863; }
+        svg {
+            width: 60px;
+            height: 60px;
+        }
+    </style>
 </head>
 <body>
+    <div id="board">
+        <!-- Rząd 1 - Białe figury -->
+        <div class="square light">🔲</div>
+        <div class="square dark">
+            <!-- Biały skoczek -->
+            <svg viewBox="0 0 45 45">
+                <path d="M10,35 L35,35 L30,20 L15,20 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square light">
+            <!-- Biały goniec -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="10" r="5" stroke="black" fill="white"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square dark">
+            <!-- Biały hetman -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="7" r="4" stroke="black" fill="white"/>
+                <path d="M12,35 L33,35 L22.5,10 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square light">
+            <!-- Biały król -->
+            <svg viewBox="0 0 45 45">
+                <rect x="18" y="6" width="10" height="10" stroke="black" fill="white"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square dark"> <!-- Drugi Goniec -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="10" r="5" stroke="black" fill="white"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square light"> <!-- Drugi Skoczek -->
+            <svg viewBox="0 0 45 45">
+                <path d="M10,35 L35,35 L30,20 L15,20 Z" stroke="black" fill="white"/>
+            </svg>
+        </div>
+        <div class="square dark">🔲</div>
 
-    <div class="container">
-        <h1>♟️ Szachy Online</h1>
-        <div id="chessboard"></div>
-        <p id="status">Twój ruch: białe</p>
-        <button id="reset">Resetuj grę</button>
+        <!-- Rząd 2 - Białe pionki -->
+        <script>
+            for (let i = 0; i < 8; i++) {
+                document.write(`
+                    <div class="square ${i % 2 === 0 ? 'dark' : 'light'}">
+                        <svg viewBox="0 0 45 45">
+                            <circle cx="22.5" cy="15" r="5" stroke="black" fill="white"/>
+                            <path d="M10,35 L35,35 L22.5,20 Z" stroke="black" fill="white"/>
+                        </svg>
+                    </div>
+                `);
+            }
+        </script>
+
+        <!-- Puste pola -->
+        <script>
+            for (let i = 0; i < 32; i++) {
+                document.write(`<div class="square ${(Math.floor(i / 8) + i) % 2 === 0 ? 'light' : 'dark'}"></div>`);
+            }
+        </script>
+
+        <!-- Rząd 7 - Czarne pionki -->
+        <script>
+            for (let i = 0; i < 8; i++) {
+                document.write(`
+                    <div class="square ${i % 2 === 0 ? 'light' : 'dark'}">
+                        <svg viewBox="0 0 45 45">
+                            <circle cx="22.5" cy="15" r="5" stroke="black" fill="black"/>
+                            <path d="M10,35 L35,35 L22.5,20 Z" stroke="black" fill="black"/>
+                        </svg>
+                    </div>
+                `);
+            }
+        </script>
+
+        <!-- Rząd 8 - Czarne figury -->
+        <div class="square dark">🔳</div>
+        <div class="square light">
+            <!-- Czarny Skoczek -->
+            <svg viewBox="0 0 45 45">
+                <path d="M10,35 L35,35 L30,20 L15,20 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square dark">
+            <!-- Czarny Goniec -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="10" r="5" stroke="black" fill="black"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square light">
+            <!-- Czarny Hetman -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="7" r="4" stroke="black" fill="black"/>
+                <path d="M12,35 L33,35 L22.5,10 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square dark">
+            <!-- Czarny Król -->
+            <svg viewBox="0 0 45 45">
+                <rect x="18" y="6" width="10" height="10" stroke="black" fill="black"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square light"> <!-- Drugi Czarny Goniec -->
+            <svg viewBox="0 0 45 45">
+                <circle cx="22.5" cy="10" r="5" stroke="black" fill="black"/>
+                <path d="M10,35 L35,35 L22.5,15 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square dark"> <!-- Drugi Czarny Skoczek -->
+            <svg viewBox="0 0 45 45">
+                <path d="M10,35 L35,35 L30,20 L15,20 Z" stroke="black" fill="black"/>
+            </svg>
+        </div>
+        <div class="square light">🔳</div>
     </div>
-
-    <script src="pieces.js"></script>
-    <script src="script.js"></script>
 </body>
 </html>
